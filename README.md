@@ -1,5 +1,5 @@
 ## Debian dev environment with basic build tools and valgrind.
-### Explicitely installed packages: 
+### Explicitly installed packages: 
 	• build-essential
 	• cmake
 	• gcc

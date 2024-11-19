@@ -12,5 +12,5 @@ RUN apt-get install sudo locales build-essential git cmake valgrind openmpi-bin 
 
 WORKDIR /Project
 
-# # docker build -t georgemarkas/my-debian:latest
-# docker run -tiv $PWD/path/to/my/files:/Project georgemarkas/my-debian:latest
+# docker build . -t georgemarkas/my-debian:latest
+# docker run --name myContainer -tiv $PWD/path/to/my/files:/Project georgemarkas/my-debian:latest

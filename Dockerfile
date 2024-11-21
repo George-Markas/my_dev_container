@@ -1,8 +1,8 @@
 # Build and run: 
 #   docker build . -t georgemarkas/my-debian:latest
-#   docker run --name my-container -tiv $PWD/path/to/my/files:/Project georgemarkas/my-debian:latest
+#   docker run --name my-container -v /path/to/my/files:/Project:rw -ti georgemarkas/my-debian:latest
 
-FROM debian:bookworm-slim
+FROM debian:latest
 CMD ["bash"]
 
 # Set timezone
@@ -33,6 +33,9 @@ RUN apt-get update && apt-get install --yes \
     dos2unix \
     rsync \
     tar \
+    python3 \
+    python3-pip \
+    kmod \
 && apt-get clean
     
 WORKDIR /Project

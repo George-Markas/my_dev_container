@@ -1,5 +1,5 @@
 ## Debian dev environment with basic build tools and valgrind.
-### Explicitly installed packages (apt-mark showmanual): 
+### Explicitly installed packages (*apt-mark showmanual*): 
 	automake
 	build-essential
 	clang

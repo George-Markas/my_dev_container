@@ -1,9 +1,4 @@
-# Build and run: 
-#   docker build . -t georgemarkas/my-debian:latest
-#   docker run --name my-container -v /path/to/my/files:/Project:rw -ti georgemarkas/my-debian:latest
-
 FROM debian:latest
-CMD ["bash"]
 
 # Set timezone
 ENV TIMEZONE=Europe/Athens
@@ -35,7 +30,17 @@ RUN apt-get update && apt-get install --yes \
     tar \
     python3 \
     python3-pip \
-    kmod \
-&& apt-get clean
-    
+    openssh-server \
+&& apt-get clean                                    
+
+RUN mkdir /var/run/sshd
+RUN echo 'root:toor' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Expose SSH port
+EXPOSE 22
+
+# Start SSH service
+CMD ["/usr/sbin/sshd", "-D"]
+
 WORKDIR /Project

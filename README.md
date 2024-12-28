@@ -24,4 +24,4 @@
 	sudo
 	tar
 	valgrind
-	vim
+	neovim

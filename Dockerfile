@@ -1,10 +1,10 @@
 FROM debian:latest
 
-# Set timezone
+# set timezone
 ENV TIMEZONE=Europe/Athens
 RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /etc/timezone
 
-# Install packages
+# install packages
 RUN apt-get update && apt-get install --yes \ 
     sudo \
     build-essential \
@@ -33,20 +33,26 @@ RUN apt-get update && apt-get install --yes \
     openssh-server \
 && apt-get clean                                    
 
+# bash config
+COPY .bashrc .bashenv /root/
+
+# lf settings
+RUN mkdir -p /root/.config/lf
+COPY lfrc /root/.config/lf
+
+# ssh setup
 RUN mkdir /var/run/sshd
 RUN echo 'root:toor' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# Expose SSH port
+# ssh port
 EXPOSE 22
 
-# Start SSH service
+# start ssh service
 CMD ["/usr/sbin/sshd", "-D"]
 
-WORKDIR /Project
-
-# Create container
+# create container
 # docker run --name my-debian -v C:\Users\George\Documents\CLionProjects\:/Project:rw -p 2222:22 -itd georgemarkas/my-debian:latest
 
-# Attach
+# attach
 # docker exec -it my-debian /bin/bash

@@ -1,0 +1,8 @@
+# general settings
+set hidden true
+set ignorecase true
+set ifs "\n"
+set info size
+
+# shell
+map t :shell

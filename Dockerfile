@@ -7,9 +7,8 @@ RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /et
 # Install packages
 RUN apt-get update && apt-get install --yes \ 
     sudo \
-    locales-all \ 
     build-essential \
-    vim \
+    neovim \
     lf \
     git \
     make \
@@ -28,6 +27,7 @@ RUN apt-get update && apt-get install --yes \
     dos2unix \
     rsync \
     tar \
+    unzip\
     python3 \
     python3-pip \
     openssh-server \
@@ -44,3 +44,9 @@ EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 
 WORKDIR /Project
+
+# Create container
+# docker run --name my-debian -v C:\Users\George\Documents\CLionProjects\:/Project:rw -p 2222:22 -itd georgemarkas/my-debian:latest
+
+# Attach
+# docker exec -it my-debian /bin/bash

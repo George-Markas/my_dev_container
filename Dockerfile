@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install --yes \
 && apt-get clean                                    
 
 # bash config
-COPY .bashrc .bashenv /root/
+COPY .bashrc /root/
 
 # lf settings
 RUN mkdir -p /root/.config/lf

@@ -1,6 +1,6 @@
 FROM fedora:latest
 
-# Set your timezone in the TIMEZONE variable below
+# Set timezone
 ENV TIMEZONE=Europe/Athens
 RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /etc/timezone
 

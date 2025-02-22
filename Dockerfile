@@ -1,16 +1,13 @@
-FROM debian:latest
+FROM fedora:latest
 
-# set timezone
+# Set your timezone in the TIMEZONE variable below
 ENV TIMEZONE=Europe/Athens
 RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /etc/timezone
 
-# install packages
-RUN apt-get update && apt-get install --yes \ 
-    sudo \
-    build-essential \
-    neovim \
-    lf \
-    git \
+# Install packages
+RUN dnf upgrade -y && dnf install -y \
+	git \
+	vim \
     make \
     cmake \
     clang \
@@ -19,40 +16,22 @@ RUN apt-get update && apt-get install --yes \
     automake \
     libtool \
     valgrind \
-    openmpi-bin \
-    libopenmpi-dev \
+	gdb-15.1-1.fc41 \
     gcc \
-    gdb \
-    g++ \
-    dos2unix \
-    rsync \
+    gcc-c++ \
+    openmpi \
+    openmpi-devel \
+	dos2unix \
     tar \
-    unzip\
+    unzip \
     python3 \
     python3-pip \
-    openssh-server \
-&& apt-get clean                                    
+&& dnf clean all
 
-# bash config
-COPY .bashrc /root/
+#=======================================================================================================
 
-# lf settings
-RUN mkdir -p /root/.config/lf
-COPY lfrc /root/.config/lf
+# To create a container with a volume:
+# docker run --name your_container_name --volume /path/to/your/stuff:/Project:rw -itd your_name:your_tag
 
-# ssh setup
-RUN mkdir /var/run/sshd
-RUN echo 'root:toor' | chpasswd
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-# ssh port
-EXPOSE 22
-
-# start ssh service
-CMD ["/usr/sbin/sshd", "-D"]
-
-# create container
-# docker run --name my-debian -v C:\Users\George\Documents\CLionProjects\:/Project:rw -p 2222:22 -itd georgemarkas/my-debian:latest
-
-# attach
-# docker exec -it my-debian /bin/bash
+# To "attach" the container:
+# docker exec -it your_container_name /bin/bash

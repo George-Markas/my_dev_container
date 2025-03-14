@@ -15,12 +15,11 @@ RUN dnf upgrade -y && dnf install -y \
     autoconf \
     automake \
     libtool \
+	libasan \
     valgrind \
 	gdb-15.1-1.fc41 \
     gcc \
     gcc-c++ \
-    openmpi \
-    openmpi-devel \
 	dos2unix \
     tar \
     unzip \

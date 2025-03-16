@@ -44,6 +44,8 @@ RUN cd /root/.local/bin && gcc fsm.c -o fsm
 # Install croc
 RUN curl https://getcroc.schollz.com | bash
 
+WORKDIR /root
+
 #=========================================================================================
 
 # Build image:

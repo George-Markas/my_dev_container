@@ -27,10 +27,13 @@ RUN dnf upgrade -y && dnf install -y \
     python3-pip \
 && dnf clean all
 
-#=======================================================================================================
+#=========================================================================================
 
-# To create a container with a volume:
-# docker run --name your_container_name --volume /path/to/your/stuff:/Project:rw -itd your_name:your_tag
+# Build image:
+# docker build . -t my_dev_container
 
-# To "attach" the container:
-# docker exec -it your_container_name /bin/bash
+# Create container:
+# docker run --name fedora_dev -itd my_dev_container:latest
+
+# Start shell:
+# docker exec -it fedora_dev /bin/bash

@@ -37,6 +37,7 @@ RUN wget -qO- https://getcroc.schollz.com | bash
 
 # Set some configs
 COPY .bashrc .vimrc /root
+RUN echo 'set bell-style none' >> /root/.inputrc
 
 WORKDIR /root
 	

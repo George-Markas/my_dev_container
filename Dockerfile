@@ -1,8 +1,7 @@
 FROM alpine:latest
 
 # Install packages
-RUN apk update && \
-	apk add --no-cache \
+RUN apk update && apk add --no-cache \
 	bash \
 	bash-completion \
 	coreutils \
@@ -11,8 +10,7 @@ RUN apk update && \
 	git \
 	vim \
 	build-base \
-	cmake \
-	extra-cmake-modules \
+	cmake=3.29.3-r0 --repository http://dl-cdn.alpinelinux.org/alpine/v3.20/main \
 	gdb \
 	valgrind \
 	python3 \
@@ -22,8 +20,7 @@ RUN apk update && \
 	openssh \
 	net-tools \
 	tzdata \
-	grep \
-&& rm -rf /var/cache/apk/*
+	grep
 
 # Set timezone
 ENV TIMEZONE=Europe/Athens
